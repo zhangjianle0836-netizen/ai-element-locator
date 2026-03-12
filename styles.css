@@ -1,0 +1,253 @@
+/**
+ * 元素定位器样式
+ */
+
+:root {
+  --element-locator-ink: #171511;
+  --element-locator-muted: #6d655b;
+  --element-locator-line: rgba(23, 21, 17, 0.1);
+  --element-locator-accent: #cb5a2e;
+  --element-locator-accent-deep: #974321;
+  --element-locator-panel: #fffdf8;
+  --element-locator-panel-soft: #f4ede2;
+  --element-locator-overlay: rgba(28, 21, 16, 0.48);
+  --element-locator-shadow: 0 30px 80px rgba(29, 22, 17, 0.24);
+  --element-locator-mono: "SF Mono", Monaco, Menlo, Consolas, monospace;
+  --element-locator-sans: "SF Pro Display", "Segoe UI", sans-serif;
+}
+
+/* 元素高亮 */
+.element-locator-highlight {
+  outline: 2px solid var(--element-locator-accent) !important;
+  outline-offset: 2px !important;
+  background:
+    linear-gradient(180deg, rgba(203, 90, 46, 0.08), rgba(203, 90, 46, 0.02)) !important;
+  box-shadow: inset 0 0 0 1px rgba(203, 90, 46, 0.14) !important;
+  cursor: crosshair !important;
+}
+
+/* 通知提示 */
+.element-locator-notification {
+  position: fixed !important;
+  top: 18px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  min-width: min(680px, calc(100vw - 24px)) !important;
+  max-width: min(760px, calc(100vw - 24px)) !important;
+  background: rgba(23, 21, 17, 0.94) !important;
+  color: rgba(255, 247, 239, 0.92) !important;
+  padding: 14px 18px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28) !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+  font-family: var(--element-locator-sans) !important;
+  letter-spacing: 0.01em !important;
+  z-index: 2147483647 !important;
+  animation: slideDown 0.22s ease !important;
+  pointer-events: none !important;
+}
+
+/* 编辑横幅 */
+.element-locator-banner {
+  position: fixed !important;
+  inset: 0 !important;
+  background:
+    radial-gradient(circle at top left, rgba(203, 90, 46, 0.16), transparent 24%),
+    var(--element-locator-overlay) !important;
+  z-index: 2147483647 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 28px !important;
+  animation: fadeIn 0.22s ease !important;
+}
+
+.element-locator-banner * {
+  box-sizing: border-box !important;
+  font-family: var(--element-locator-sans) !important;
+}
+
+.element-locator-banner > div:not([class]) {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 252, 247, 0.98)) !important;
+  border: 1px solid rgba(255, 255, 255, 0.72) !important;
+  border-radius: 24px !important;
+  box-shadow: var(--element-locator-shadow) !important;
+  width: min(920px, 100%) !important;
+  max-height: min(88vh, 920px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  animation: slideIn 0.22s ease !important;
+  backdrop-filter: blur(18px) !important;
+}
+
+.element-locator-banner-header {
+  background:
+    linear-gradient(135deg, rgba(23, 21, 17, 0.98), rgba(61, 45, 34, 0.93)) !important;
+  padding: 18px 22px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.element-locator-banner-title {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #fff8ef !important;
+  letter-spacing: -0.02em !important;
+}
+
+.element-locator-banner-close {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 248, 239, 0.76) !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 12px !important;
+  font-size: 20px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease !important;
+}
+
+.element-locator-banner-close:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: #fff8ef !important;
+  transform: translateY(-1px) !important;
+}
+
+.element-locator-banner-body {
+  flex: 1 !important;
+  padding: 20px 22px !important;
+  overflow-y: auto !important;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.96), rgba(244, 237, 226, 0.72)) !important;
+}
+
+.element-locator-banner-textarea {
+  width: 100% !important;
+  min-height: 360px !important;
+  padding: 18px !important;
+  border: 1px solid rgba(23, 21, 17, 0.1) !important;
+  border-radius: 18px !important;
+  font-family: var(--element-locator-mono) !important;
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+  resize: vertical !important;
+  color: var(--element-locator-ink) !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+}
+
+.element-locator-banner-textarea:focus {
+  outline: none !important;
+  border-color: rgba(203, 90, 46, 0.5) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  box-shadow: 0 0 0 4px rgba(203, 90, 46, 0.12) !important;
+}
+
+.element-locator-banner-footer {
+  padding: 18px 22px 22px !important;
+  background: rgba(255, 250, 243, 0.92) !important;
+  border-top: 1px solid var(--element-locator-line) !important;
+}
+
+.element-locator-banner-actions {
+  display: flex !important;
+  gap: 10px !important;
+  justify-content: flex-end !important;
+  flex-wrap: wrap !important;
+}
+
+.element-locator-banner-btn {
+  min-width: 112px !important;
+  padding: 11px 18px !important;
+  border: 1px solid rgba(23, 21, 17, 0.1) !important;
+  border-radius: 14px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease !important;
+  background: rgba(255, 255, 255, 0.78) !important;
+  color: var(--element-locator-ink) !important;
+}
+
+.element-locator-banner-btn:hover {
+  background: #fffdf9 !important;
+  transform: translateY(-1px) !important;
+}
+
+.element-locator-banner-btn-primary {
+  background: linear-gradient(135deg, var(--element-locator-accent), var(--element-locator-accent-deep)) !important;
+  border-color: transparent !important;
+  color: #fff8ef !important;
+  box-shadow: 0 14px 26px rgba(151, 67, 33, 0.22) !important;
+}
+
+.element-locator-banner-btn-primary:hover {
+  filter: saturate(1.06) !important;
+}
+
+/* 动画 */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .element-locator-banner {
+    padding: 12px !important;
+  }
+
+  .element-locator-banner > div:not([class]) {
+    width: 100% !important;
+    max-height: 92vh !important;
+    border-radius: 18px !important;
+  }
+
+  .element-locator-banner-body {
+    padding: 14px !important;
+  }
+
+  .element-locator-banner-footer {
+    padding: 14px !important;
+  }
+
+  .element-locator-banner-textarea {
+    min-height: 280px !important;
+  }
+
+  .element-locator-notification {
+    min-width: auto !important;
+    width: calc(100vw - 20px) !important;
+  }
+}

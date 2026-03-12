@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>元素定位器</title>
+  <style>
+    :root {
+      --bg: #f3efe7;
+      --panel: #fffdf8;
+      --panel-strong: #161512;
+      --ink: #181713;
+      --muted: #686256;
+      --line: rgba(24, 23, 19, 0.1);
+      --accent: #cb5a2e;
+      --accent-deep: #9e3f1c;
+      --success: #247a52;
+      --shadow: 0 20px 40px rgba(34, 27, 21, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 360px;
+      padding: 0;
+      font-family: "SF Pro Display", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(203, 90, 46, 0.16), transparent 36%),
+        linear-gradient(180deg, #f7f1e8 0%, var(--bg) 100%);
+      color: var(--ink);
+    }
+
+    .container {
+      text-align: left;
+      padding: 14px;
+    }
+
+    .shell {
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 22px;
+      background: rgba(255, 253, 248, 0.88);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero {
+      padding: 20px 20px 18px;
+      background:
+        linear-gradient(135deg, rgba(24, 23, 19, 0.98), rgba(61, 45, 34, 0.92));
+      color: #f8f2e9;
+    }
+
+    .hero-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-badge::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(203, 90, 46, 0.8);
+    }
+
+    .hero-meta {
+      font-size: 11px;
+      color: rgba(248, 242, 233, 0.7);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: 26px;
+      line-height: 1;
+      margin: 0 0 10px 0;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: rgba(248, 242, 233, 0.78);
+      margin: 0;
+      line-height: 1.5;
+      max-width: 280px;
+    }
+
+    .main {
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff7ef;
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+      box-shadow: 0 14px 26px rgba(158, 63, 28, 0.24);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      filter: saturate(1.06);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn.active {
+      background: linear-gradient(135deg, #8b1e26, #c23039);
+      box-shadow: 0 14px 26px rgba(139, 30, 38, 0.26);
+    }
+
+    .status {
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(255, 250, 242, 0.96), rgba(247, 239, 229, 0.94));
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .status-copy {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .status-label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #8a8274;
+      margin-bottom: 2px;
+    }
+
+    .status-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .status-pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #8a8274;
+      background: rgba(24, 23, 19, 0.05);
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #b4aa9b;
+      box-shadow: 0 0 0 5px rgba(180, 170, 155, 0.16);
+    }
+
+    .status-dot.active {
+      background: var(--success);
+      box-shadow: 0 0 0 5px rgba(36, 122, 82, 0.12);
+    }
+
+    .tips {
+      display: grid;
+      gap: 10px;
+    }
+
+    .tips-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #8a8274;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .tips ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .tips li {
+      font-size: 12px;
+      color: var(--muted);
+      padding: 12px 12px 12px 42px;
+      position: relative;
+      line-height: 1.5;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .tips li:before {
+      content: attr(data-step);
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      width: 22px;
+      height: 22px;
+      margin-top: -11px;
+      border-radius: 50%;
+      background: rgba(24, 23, 19, 0.08);
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quick-note {
+      padding: 14px;
+      border-radius: 16px;
+      background: #161512;
+      color: rgba(248, 242, 233, 0.84);
+    }
+
+    .quick-note strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #fff7ef;
+      font-size: 13px;
+    }
+
+    .quick-note p {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .footer {
+      padding: 14px 18px 18px;
+      border-top: 1px solid var(--line);
+      font-size: 11px;
+      color: #8a8274;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    @media (max-width: 380px) {
+      body {
+        width: 340px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="shell">
+      <div class="hero">
+        <div class="hero-top">
+          <span class="hero-badge">Precision Mode</span>
+          <span class="hero-meta">Chrome Extension</span>
+        </div>
+        <h1>元素定位器</h1>
+        <p class="subtitle">在复杂页面里更快锁定真实业务节点，生成可验证的定位信息。</p>
+      </div>
+
+      <div class="main">
+        <button id="toggleBtn" class="btn">
+          开始选择
+        </button>
+
+        <div class="status">
+          <div class="status-item">
+            <div class="status-copy">
+              <span class="status-dot" id="statusDot"></span>
+              <div>
+                <span class="status-label">当前状态</span>
+                <span class="status-value" id="statusText">未激活</span>
+              </div>
+            </div>
+            <span class="status-pill">ESC 退出</span>
+          </div>
+        </div>
+
+        <div class="tips">
+          <div class="tips-title">操作路径</div>
+          <ul>
+            <li data-step="1">点击主按钮进入选择模式</li>
+            <li data-step="2">移动鼠标确认高亮是否命中目标</li>
+            <li data-step="3">点击元素，必要时按住 Alt 选父级</li>
+            <li data-step="4">在结果面板中复制定位信息</li>
+          </ul>
+        </div>
+
+        <div class="quick-note">
+          <strong>复杂页面建议</strong>
+          <p>优先点业务节点本体，比如按钮容器、卡片标题、表单输入框，避免直接点图标或装饰性文字。</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>Version <strong>1.2.0</strong></span>
+        <span>Locator UI</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
