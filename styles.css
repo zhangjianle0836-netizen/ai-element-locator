@@ -168,31 +168,72 @@
 
 .element-locator-banner-btn {
   min-width: 112px !important;
-  padding: 11px 18px !important;
+  position: relative !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  padding: 11px 34px 11px 18px !important;
   border: 1px solid rgba(23, 21, 17, 0.1) !important;
   border-radius: 14px !important;
   font-size: 13px !important;
   font-weight: 600 !important;
   cursor: pointer !important;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
   background: rgba(255, 255, 255, 0.78) !important;
   color: var(--element-locator-ink) !important;
 }
 
+.element-locator-banner-btn::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 50% !important;
+  right: 16px !important;
+  width: 7px !important;
+  height: 7px !important;
+  border-top: 1.5px solid currentColor !important;
+  border-right: 1.5px solid currentColor !important;
+  opacity: 0 !important;
+  transform: translate(-4px, -50%) rotate(45deg) !important;
+  transition: opacity 0.15s ease, transform 0.15s ease !important;
+}
+
 .element-locator-banner-btn:hover {
-  background: #fffdf9 !important;
   transform: translateY(-1px) !important;
 }
 
 .element-locator-banner-btn-primary {
+  background-color: var(--element-locator-accent-deep) !important;
+  background-image: linear-gradient(135deg, var(--element-locator-accent), var(--element-locator-accent-deep)) !important;
   background: linear-gradient(135deg, var(--element-locator-accent), var(--element-locator-accent-deep)) !important;
   border-color: transparent !important;
   color: #fff8ef !important;
   box-shadow: 0 14px 26px rgba(151, 67, 33, 0.22) !important;
 }
 
-.element-locator-banner-btn-primary:hover {
-  filter: saturate(1.06) !important;
+.element-locator-banner-btn-primary:hover,
+.element-locator-banner-btn-primary:active,
+.element-locator-banner-btn-primary:focus,
+.element-locator-banner-btn-primary:focus-visible {
+  background-color: var(--element-locator-accent-deep) !important;
+  background-image: linear-gradient(135deg, var(--element-locator-accent), var(--element-locator-accent-deep)) !important;
+  background: linear-gradient(135deg, var(--element-locator-accent), var(--element-locator-accent-deep)) !important;
+  color: #fff8ef !important;
+  border-color: transparent !important;
+}
+
+.element-locator-banner-btn:hover::after,
+.element-locator-banner-btn:focus-visible::after {
+  opacity: 0.72 !important;
+  transform: translate(0, -50%) rotate(45deg) !important;
+}
+
+.element-locator-banner-btn:focus-visible {
+  outline: none !important;
+  transform: translateY(-1px) !important;
+}
+
+.element-locator-banner-btn-primary:focus-visible {
+  background: linear-gradient(135deg, var(--element-locator-accent), var(--element-locator-accent-deep)) !important;
+  box-shadow: 0 0 0 4px rgba(203, 90, 46, 0.2), 0 14px 26px rgba(151, 67, 33, 0.22) !important;
 }
 
 /* 动画 */

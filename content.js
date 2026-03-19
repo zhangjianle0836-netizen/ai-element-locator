@@ -15,6 +15,7 @@ class ElementLocator {
     this.lastInfo = null;
     this.lastFramework = null;
     this.originalCursor = '';
+    this.copyFeedbackTimer = null;
 
     this.init();
   }
@@ -270,9 +271,9 @@ class ElementLocator {
       textarea.style.cssText = 'position:fixed;opacity:0';
       document.body.appendChild(textarea);
       textarea.select();
-      document.execCommand('copy');
+      const copied = document.execCommand('copy');
       document.body.removeChild(textarea);
-      return true;
+      return copied;
     }
   }
 
@@ -320,11 +321,13 @@ class ElementLocator {
 
     const formatBtn = document.createElement('button');
     formatBtn.className = 'element-locator-banner-btn element-locator-banner-btn-secondary';
+    formatBtn.type = 'button';
     formatBtn.setAttribute('data-action', 'format');
     formatBtn.textContent = '切换格式';
 
     const copyBtn = document.createElement('button');
     copyBtn.className = 'element-locator-banner-btn element-locator-banner-btn-primary';
+    copyBtn.type = 'button';
     copyBtn.setAttribute('data-action', 'copy');
     copyBtn.textContent = '复制';
 
@@ -343,11 +346,18 @@ class ElementLocator {
     closeBtn.addEventListener('click', () => this.hideEditBanner());
 
     copyBtn.addEventListener('click', async () => {
-      await this.copyToClipboard(textarea.value);
-      copyBtn.textContent = '已复制';
-      setTimeout(() => {
+      if (this.copyFeedbackTimer) {
+        clearTimeout(this.copyFeedbackTimer);
+        this.copyFeedbackTimer = null;
+      }
+
+      const copied = await this.copyToClipboard(textarea.value);
+      copyBtn.textContent = copied ? '已复制' : '复制失败';
+
+      this.copyFeedbackTimer = setTimeout(() => {
         copyBtn.textContent = '复制';
-      }, 2000);
+        this.copyFeedbackTimer = null;
+      }, copied ? 2000 : 2500);
     });
 
     formatBtn.addEventListener('click', () => {
@@ -382,6 +392,11 @@ class ElementLocator {
    * 隐藏编辑横幅
    */
   hideEditBanner() {
+    if (this.copyFeedbackTimer) {
+      clearTimeout(this.copyFeedbackTimer);
+      this.copyFeedbackTimer = null;
+    }
+
     if (this.banner?.parentElement) {
       this.banner.parentElement.removeChild(this.banner);
       this.banner = null;
